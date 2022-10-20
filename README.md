@@ -1,17 +1,18 @@
 # Project_m
 
-Pasos seguidos:
+## Pasos seguidos:
 
-	Se ha creado un entorno virtual,  en este caso mediante
- pip install virtualenv
+- Se ha creado un entorno virtual,  en este caso mediante
+	pip install virtualenv
  
- 	Se creado y activado el entorno virtual ‘env_site’
-	En el entorno virtual se ha instalado django
-	Se ha iniciado el proyecto_m
+- Se creado y activado el entorno virtual ‘env_site’
+- En el entorno virtual se ha instalado django
+- Se ha iniciado el proyecto_m
   
 Se inicia el servidor  mediante mange.py  que pertenece a django, al cual podemos acceder mediante la Url:
 
 	http://127.0.0.1:8000/
+### Estructura inicial
 
 Para crear la estructura inicial se ha instalado django rest frameworks,  que es un complemento de django para desarrollar apis de forma rápida y que además proporciona una interfaz gráfica, (a través de de las vistas que tiene implementadas), facilitando de este modo hacer pruebas.
 
@@ -19,17 +20,8 @@ En el archivo setting.py del proyecto se añade a las aplicaciones instaladas de
 
 Una vez instalado DRF mediante manage.py inicializamos una api vacía, para el proyecto, esto, crea la carpeta api, y se debe añadir a las aplicaciones instaladas del archivo settings.py, “api.apps.ApiConfig”.
 
-El siguiente paso es crear las URL en el proyecto: ( products/urls.py)
-path('', include('api.urls'))
 
-Posteriormente se añaden las Url para cada una de las vistas:(api/urls.py)
-para ver la lista de los productos  
-path('', ProductList.as_view())
-para crear productos
-path('create', ProductCreate.as_view()), 
-para actualizar y  borrar productos
-path('<int:pk>', ProductDetail.as_view()),  para actualizar y  borrar productos
-
+### Modelo
 Para la creación del modelo Crearemos un modelo de producto. La API utilizará este modelo para realizar las operaciones de CRUD.
 
 name = models.CharField(max_length=255, unique=True)
@@ -43,11 +35,13 @@ auto_now_add →  añade la fecha cuando solo cuando se crea
 update_date = models.DateTimeField(auto_now=True)
 auto_now → añade la fecha cuando se actualiza
 
+### Serializadores
 A continuación  se han de crear los serializadores, en api/serializer.py.
 DRF  se encargan de la serialización y deserialización de datos y leer y escribir en  base de datos.
 
 Se utiliza el ModelSerializer mapeando el producto que además de serializar y deserializar,  permite,  crear, actualizar  y  borrar.
 
+### Vistas
 Crear vistas: 
  en apis/views.py se crean tres vistas.
 
@@ -60,6 +54,7 @@ Creación:
 Detalle:
 	ProductDetail(generics.RetrieveUpdateDestroyAPIView)
 
+### URLS
 Por último  queda indicar la ruta de los end points correspondientes a cada vista. en 
 api/urls.py 
 

@@ -84,12 +84,12 @@ Para arrancar el servicio en local.
 
 
 ### Docker 
-crear imagen:
+#### crear imagen:
 
-docker build -t project_m .
+	docker build -t project_m .
 
-arrancar un contenedor la la imagen:
-docker run -it -p 8000:8000 project_m
+#### arrancar un contenedor la la imagen:
+	docker run -it -p 8000:8000 project_m
 
 
 ### Instrucciones

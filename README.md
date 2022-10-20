@@ -95,7 +95,7 @@ Para arrancar el servicio en local.
 	docker run -it -p 8000:8000 project_m
 
 
-### Instrucciones
+### Llamadas curl
 
 #### Cómo listar productos
 

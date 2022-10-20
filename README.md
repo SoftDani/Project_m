@@ -25,15 +25,18 @@ Una vez instalado DRF mediante manage.py inicializamos una api vacía, para el p
 Para la creación del modelo Crearemos un modelo de producto. La API utilizará este modelo para realizar las operaciones de CRUD.
 
 	name = models.CharField(max_length=255, unique=True)
-		unique → no permite que se repitan los nombres
+	
+		* unique → no permite que se repitan los nombres
 
 	detail = models.CharField(max_length=255)
 
 	creation_date = models.DateTimeField(auto_now_add=True)
-		auto_now_add →  añade la fecha cuando solo cuando se crea
+	
+		* auto_now_add →  añade la fecha solo cuando se crea ***
 
 	update_date = models.DateTimeField(auto_now=True)
-		auto_now → añade la fecha cuando se actualiza
+		
+		* auto_now → añade la fecha cuando se actualiza
 
 ### Serializadores
 A continuación  se han de crear los serializadores, en api/serializer.py.

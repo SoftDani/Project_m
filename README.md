@@ -98,7 +98,7 @@ docker run -it -p 8000:8000 project_m
 
 	curl --location --request GET 'http://127.0.0.1:8000/'
 
-#### Crear producto
+#### Crear producto
 
 	curl --location --request POST 'http://127.0.0.1:8000/create' \
 	--header 'Content-Type: application/json' \
@@ -107,7 +107,7 @@ docker run -it -p 8000:8000 project_m
    		"detail": "product detail"
 		}'
 
-#### Actualizar producto
+#### Actualizar producto
 
 	curl --location --request PUT 'http://127.0.0.1:8000/<pk>' \
 	--header 'Content-Type: application/json' \
@@ -116,10 +116,10 @@ docker run -it -p 8000:8000 project_m
    		"detail": "product detail"
 	}'
 
-#### Borrar producto
+#### Borrar producto
 	
 	curl --location --request DELETE 'http://127.0.0.1:8000/<pk>'
 
-ver detalle del producto
+#### Ver detalle del producto
 	
 	curl --location --request GET 'http://127.0.0.1:8000/<pk>'

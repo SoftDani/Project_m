@@ -24,16 +24,16 @@ Una vez instalado DRF mediante manage.py inicializamos una api vacía, para el p
 ### Modelo
 Para la creación del modelo Crearemos un modelo de producto. La API utilizará este modelo para realizar las operaciones de CRUD.
 
-name = models.CharField(max_length=255, unique=True)
-unique → no permite que se repitan los nombres
+	name = models.CharField(max_length=255, unique=True)
+		unique → no permite que se repitan los nombres
 
-detail = models.CharField(max_length=255)
+	detail = models.CharField(max_length=255)
 
-creation_date = models.DateTimeField(auto_now_add=True)
-auto_now_add →  añade la fecha cuando solo cuando se crea
+	creation_date = models.DateTimeField(auto_now_add=True)
+		auto_now_add →  añade la fecha cuando solo cuando se crea
 
-update_date = models.DateTimeField(auto_now=True)
-auto_now → añade la fecha cuando se actualiza
+	update_date = models.DateTimeField(auto_now=True)
+		auto_now → añade la fecha cuando se actualiza
 
 ### Serializadores
 A continuación  se han de crear los serializadores, en api/serializer.py.
@@ -59,59 +59,67 @@ Por último  queda indicar la ruta de los end points correspondientes a cada vis
 api/urls.py 
 
 urlpatterns:
-   path('', ProductList.as_view()), → Para ver los productos
-se accede  accede directamente  con la url: http://127.0.0.1:8000/
 
-   path('create', ProductCreate.as_view()), → Para crear productos
-	se accede  accede directamente  con la url: http://127.0.0.1:8000/create
+	path('', ProductList.as_view()), → Para ver los productos
+		se accede  accede directamente  con la url: http://127.0.0.1:8000/
 
-   path('<int:pk>', ProductDetail.as_view()), → Para actualizar y borrar productos.
-se accede  accede directamente  con la url: http://127.0.0.1:8000/(pk del producto)
+	path('create', ProductCreate.as_view()), → Para crear productos
+		se accede  accede directamente  con la url: http://127.0.0.1:8000/create
+		
+	path('<int:pk>', ProductDetail.as_view()), → Para actualizar y borrar productos.
+		se accede  accede directamente  con la url: http://127.0.0.1:8000/(pk del producto)
 
 
 y product/urls.py indicamos que mire las url de la api.
 
 urlpatterns:
-   path('', include('api.urls'))
+	
+	path('', include('api.urls'))
 
 Para arrancar el servicio en local.
 
- source env_site/bin/activate
+	source env_site/bin/activate
 	./manage.py runserver
 
 
 
-Docker 
+### Docker 
 crear imagen:
+
 docker build -t project_m .
 
 arrancar un contenedor la la imagen:
 docker run -it -p 8000:8000 project_m
 
 
+### Instrucciones
 
+#### Cómo listar productos
 
-Cómo listar productos:
-curl --location --request GET 'http://127.0.0.1:8000/'
+	curl --location --request GET 'http://127.0.0.1:8000/'
 
-Crear producto
-curl --location --request POST 'http://127.0.0.1:8000/create' \
---header 'Content-Type: application/json' \
---data-raw '{
-   	"name": "product_name",
-   	"detail": "product detail"
-}'
+#### Crear producto
 
-Actualizar producto
-curl --location --request PUT 'http://127.0.0.1:8000/<pk>' \
---header 'Content-Type: application/json' \
---data-raw '{
-   	"name": "product_name_updated",
-   	"detail": "product detail"
-}'
+	curl --location --request POST 'http://127.0.0.1:8000/create' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+   		"name": "product_name",
+   		"detail": "product detail"
+		}'
 
-Borrar producto
-curl --location --request DELETE 'http://127.0.0.1:8000/<pk>'
+#### Actualizar producto
+
+	curl --location --request PUT 'http://127.0.0.1:8000/<pk>' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+   		"name": "product_name_updated",
+   		"detail": "product detail"
+	}'
+
+#### Borrar producto
+	
+	curl --location --request DELETE 'http://127.0.0.1:8000/<pk>'
 
 ver detalle del producto
+	
 	curl --location --request GET 'http://127.0.0.1:8000/<pk>'
